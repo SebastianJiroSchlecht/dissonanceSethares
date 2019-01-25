@@ -1,0 +1,5 @@
+% startup
+
+restoredefaultpath;
+
+addpath(genpath('.'));
