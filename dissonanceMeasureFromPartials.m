@@ -29,4 +29,4 @@ S = Dstar./(S1*Fmin+S2);
 Fdiss = exp(A1*S.*Fdif)-exp(A2*S.*Fdif);
 A = a(:,1) .* a(:,2);
 D = A .* Fdiss;
-d = sum(D);
+d = sum(D) / sqrt(sum(amp));
