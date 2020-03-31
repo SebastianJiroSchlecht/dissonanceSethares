@@ -2,11 +2,11 @@
 %
 % (c) Sebastian Jiro Schlecht:  23. November 2018
 
-NumberOfPartials = 7;
+NumberOfPartials = 1;
 LowerToneFrequency = 200; % Hz
 PartialFrequencies=LowerToneFrequency*(1:NumberOfPartials); 
 PartialAmplitudes = 0.9 .^ (1:NumberOfPartials);
-filename = 'dyad_dissonanceMeasureFromPartials';
+filename = 'dyad_dissonanceMeasureFromTones';
 
 MaximumRatio = 2.3; 
 Ratios = linspace(1,MaximumRatio,500);

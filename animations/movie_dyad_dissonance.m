@@ -2,25 +2,25 @@
 %
 %
 % (c) Sebastian Jiro Schlecht:  16. January 2019
-clear; clc; close all;
 
-filename = mfilename;
 %% video setup
 VideoFrameRate = 30;
-videoFWriter = vision.VideoFileWriter([ filename '.avi'], 'FileFormat', 'AVI', 'FrameRate', VideoFrameRate, 'AudioInputPort', true);
+% videoFWriter = vision.VideoFileWriter(['./plots/' filename '.avi'], 'FileFormat', 'AVI', 'FrameRate', VideoFrameRate, 'AudioInputPort', true);
+videoFWriter = VideoWriter(['./plots/' filename], 'MPEG-4');
+videoFWriter.FrameRate = VideoFrameRate;
+open(videoFWriter);
 
 %% audio setup
 fs = 48000;
 AudioStep = fs / VideoFrameRate;
 
 %% video signal setup
-example_dyad_dissonanceMeasureFromPartials;
 set(gcf,'Position',[600 600 400 200])
 set(gcf,'color','w');
 intervalPlot = plot(0,0,'r-x'); 
 
 %% audio signal setup
-durationOfSweep = 20; % seconds
+durationOfSweep = 40; % seconds
 time = linspace(0,durationOfSweep,fs*durationOfSweep); 
 f0 = LowerToneFrequency;
 f1 = LowerToneFrequency*MaximumRatio;
@@ -40,6 +40,7 @@ audioSignal = audioSignal / 4 / NumberOfPartials;
 audioFrames = reshape(audioSignal, [AudioStep, length(audioSignal)/AudioStep]);
 highF0Frames = reshape(highF0, [AudioStep, length(highF0)/AudioStep]);
 
+audiowrite(['./plots/' filename '.wav'], [1,1] .* audioSignal.', fs);
 
 %% content setup
 numberOfConfigurations = 12;
@@ -61,9 +62,12 @@ for frameNumber = 1:durationOfSweep*VideoFrameRate
     
    
     % write video
-    videoFWriter(I, audioFrames(:,frameNumber).*[1 1] );
+%     videoFWriter(I, audioFrames(:,frameNumber).*[1 1] );
+    writeVideo(videoFWriter,F);
+    
 end
 
 
 %% clean up
-release(videoFWriter);
+% release(videoFWriter);
+close(videoFWriter);
