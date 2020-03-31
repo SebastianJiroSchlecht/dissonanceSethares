@@ -27,7 +27,7 @@ for it = 1:length(PartialFrequenciesAll)
 end
 
 %% plot
-figure(1); hold on; grid on;
+figure(1); hold on; grid on; set(gcf,'color','w');
 stem(PartialFrequenciesLower, PartialAmplitudes, 'g');
 stem(PartialFrequenciesHigher, PartialAmplitudes, 'r');
 

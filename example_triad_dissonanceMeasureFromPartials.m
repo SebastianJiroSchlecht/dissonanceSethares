@@ -29,7 +29,7 @@ end
 
 %% plot
 close all
-figure(1); hold on; grid on;
+figure(1); hold on; grid on; set(gcf,'color','w');
 surf(rat2cent(Ratios),rat2cent(Ratios),levelOfDissonance,'EdgeColor','none')
 shading interp;
 title(['Base F0 = ' num2str(LowerToneFrequency) ' Hz'])
